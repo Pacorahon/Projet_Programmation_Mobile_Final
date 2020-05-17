@@ -1,16 +1,23 @@
 package com.example.projetdevmobile;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private List<Character> values;
+    private ImageView image;
+    private Context mContext;
+
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -26,14 +33,16 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             layout = v;
             txtHeader = (TextView) v.findViewById(R.id.firstLine);
             txtFooter = (TextView) v.findViewById(R.id.secondLine);
+            image = v.findViewById(R.id.image);
         }
     }
 
 
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ListAdapter(List<Character> myDataset) {
+    public ListAdapter(List<Character> myDataset,Context context) {
         values = myDataset;
+        mContext = context;
     }
 
     // Create new views (invoked by the layout manager)
@@ -59,7 +68,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         holder.txtHeader.setText(currentCharacter.getName());
 
 
-        holder.txtFooter.setText(currentCharacter.getId());
+        holder.txtFooter.setText(currentCharacter.getOrigin());
+
+        Glide.with(mContext).load(currentCharacter.getImage()).fitCenter().into(image);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
