@@ -5,7 +5,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface RnMApi {
-    @GET("/api/character/")
+    @GET("api/character")
     Call<RestRnMResponse> getRnMResponse();
 }
-

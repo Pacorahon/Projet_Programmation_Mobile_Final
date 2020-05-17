@@ -29,20 +29,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ShowList();
+
         makeApiCall();
     }
 
-    private void ShowList() {
+    private void ShowList(List<Character> characterList) {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        List<String> input = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            input.add("Test" + i);
-        }
-        mAdapter = new ListAdapter(input);
+
+        mAdapter = new ListAdapter(characterList);
         recyclerView.setAdapter(mAdapter);
     }
 
@@ -64,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<RestRnMResponse> call, Response<RestRnMResponse> response) {
                 if(response.isSuccessful() && response.body() != null){
                     List<Character> CharacterList = response.body().getResults();
-                    Toast.makeText(getApplicationContext(),"API Success",Toast.LENGTH_SHORT).show();
+                    ShowList(CharacterList);
                 } else {
                     showError();
                 }
