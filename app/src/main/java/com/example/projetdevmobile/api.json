@@ -1,4 +1,7 @@
-{[{"id" : 1,
+{
+ "count": 22,
+  "results":
+[{"id" : 1,
 "name":"Aatrox",
 "image":"https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg",
 "origine":"Shurima",
@@ -135,7 +138,7 @@
 "name":"Vel'Koz",
 "image":"https://www.gamosaurus.com/wp-content/uploads/League-of-Legends/Guides/S10/Vignettes/lol-guide-velkoz-support-s10-objets-sorts-contres-conseils-astuces.jpg",
 "origine":"Néant",
-"role":"mage",
+"role":"mage"
 }
 ]
 }
