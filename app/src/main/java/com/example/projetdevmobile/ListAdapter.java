@@ -67,8 +67,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         final Character currentCharacter = values.get(position);
         holder.txtHeader.setText(currentCharacter.getName());
 
-
-        holder.txtFooter.setText(currentCharacter.getOrigin());
+        holder.txtFooter.setText(currentCharacter.getRole());
 
         Glide.with(mContext).load(currentCharacter.getImage()).fitCenter().into(image);
     }
