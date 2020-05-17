@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private ListAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private static final String BASE_URL = "https://raw.githubusercontent.com/Pacorahon/Projet_Programmation_Mobile_Final/master/app/src/main/java/com/example/projetdevmobile/";
+
     private SharedPreferences sharedPreferences;
     private Gson gson;
 
@@ -36,13 +37,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSharedPreferences("app", Context.MODE_PRIVATE);
-        Gson gson = new GsonBuilder()
+        sharedPreferences = getSharedPreferences("app", Context.MODE_PRIVATE);
+        gson = new GsonBuilder()
                 .setLenient()
                 .create();
         List<Character> characterList =getDataFromCache();
         if(characterList != null){
-            ShowList(characterList)
+            ShowList(characterList);
         } else {
             makeApiCall();
         }
@@ -51,10 +52,10 @@ public class MainActivity extends AppCompatActivity {
     private List<Character> getDataFromCache() {
         String JsonCharacter = sharedPreferences.getString("JsonCharacterList",null);
         if(JsonCharacter == null) {
-            return null
+            return null;
         } else {
-            Type lisType = new TypeToken<List<Character>>() {}.getType();
-            return gson.fromJson(JsonCharacter, ListType);
+            Type ListType = new TypeToken<List<Character>>(){}.getType();
+            return gson.fromJson(JsonCharacter,ListType);
         }
     }
 
@@ -77,12 +78,12 @@ public class MainActivity extends AppCompatActivity {
 
         RnMApi RnMApi = retrofit.create(RnMApi.class);
 
-        Call<RestRnMResponse> call =RnMApi.getRnMResponse();
-        call.enqueue(new Callback<RestRnMResponse>() {
+        Call<List<Character>> call =RnMApi.getRnMResponse();
+        call.enqueue(new Callback<List<Character>>() {
             @Override
-            public void onResponse(Call<RestRnMResponse> call, Response<RestRnMResponse> response) {
-                if(response.isSuccessful() && response.body() != null){
-                    List<Character> characterList = response.body().getResults();
+            public void onResponse(Call<List<Character>> call, Response<List<Character>> response) {
+                if(response.isSuccessful()){
+                    List<Character> characterList = response.body();
                     saveList(characterList);
                     ShowList(characterList);
                 } else {
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<RestRnMResponse> call, Throwable t) {
+            public void onFailure(Call<List<Character>> call, Throwable t) {
                 showError();
             }
         });
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void saveList(List<Character> characterList) {
-        String JsonString = gson.toJson(characterList)
+        String JsonString = gson.toJson(characterList);
         sharedPreferences
                 .edit()
                 .putString("JsonCharacterList",JsonString)

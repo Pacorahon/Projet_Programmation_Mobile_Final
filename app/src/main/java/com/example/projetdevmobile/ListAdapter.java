@@ -29,15 +29,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         }
     }
 
-    public void add(int position, Character item) {
-        values.add(position, item);
-        notifyItemInserted(position);
-    }
 
-    public void remove(int position) {
-        values.remove(position);
-        notifyItemRemoved(position);
-    }
 
     // Provide a suitable constructor (depends on the kind of dataset)
     public ListAdapter(List<Character> myDataset) {
@@ -65,12 +57,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         // - replace the contents of the view with that element
         final Character currentCharacter = values.get(position);
         holder.txtHeader.setText(currentCharacter.getName());
-        holder.txtHeader.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                remove(position);
-            }
-        });
+
 
         holder.txtFooter.setText(currentCharacter.getId());
     }

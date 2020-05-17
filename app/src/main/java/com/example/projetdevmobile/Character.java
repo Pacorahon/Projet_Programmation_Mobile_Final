@@ -4,7 +4,7 @@ public class Character {
     private String name;
     private Integer id;
     private String role;
-    private String origine;
+    private String origin;
     private String image;
 
     public String getName() {
@@ -19,8 +19,8 @@ public class Character {
         return image;
     }
 
-    public String getOrigine() {
-        return origine;
+    public String getOrigin() {
+        return origin;
     }
 
     public String getRole() {
