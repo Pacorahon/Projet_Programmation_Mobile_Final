@@ -13,11 +13,4 @@ public class RestRnMResponse {
         return results;
     }
 
-    public void setCount(Integer count) {
-        this.count = count;
-    }
-
-    public void setResults(List<Character> results) {
-        this.results = results;
-    }
 }

@@ -24,12 +24,12 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ListAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private static final String BASE_URL = "https://rickandmortyapi.com/";
+    private static final String BASE_URL = "https://raw.githubusercontent.com/Pacorahon/Projet_Programmation_Mobile_Final/master/app/src/main/java/com/example/projetdevmobile/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        ShowList();
         makeApiCall();
     }
 
